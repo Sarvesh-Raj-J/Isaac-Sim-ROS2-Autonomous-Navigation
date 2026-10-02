@@ -1,0 +1,10 @@
+# ROS 2 / colcon generated artifacts
+build/
+install/
+log/
+
+# Python and editor caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vscode/
