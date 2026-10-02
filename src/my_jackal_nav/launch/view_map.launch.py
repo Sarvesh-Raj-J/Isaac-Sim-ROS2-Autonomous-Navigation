@@ -18,7 +18,7 @@ def generate_launch_description():
 
     # Define the path to the RViz configuration file
     # IMPORTANT: Make sure this file exists at the specified path!
-    rviz_config_path = os.path.join(pkg_dir, 'rviz', 'view_map.rviz')
+    rviz_config_path = os.path.join(pkg_dir, 'config', 'localization.rviz')
 
     # --- Nodes ---
 
@@ -65,4 +65,3 @@ def generate_launch_description():
         lifecycle_manager_node,
         rviz_node
     ])
-

@@ -1,9 +1,12 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_directory
+import os
 
 def generate_launch_description():
-
-    map_file = "/home/robotics/jackal_ws/src/my_jackal_nav/maps/hospitaljackal.yaml"
+    package_dir = get_package_share_directory("my_jackal_nav")
+    map_file = os.path.join(package_dir, "maps", "hospitaljackal.yaml")
+    rviz_config = os.path.join(package_dir, "config", "localization.rviz")
 
     return LaunchDescription([
 
@@ -63,7 +66,6 @@ def generate_launch_description():
             executable="rviz2",
             name="rviz2",
             output="screen",
-            arguments=["-d", "/home/robotics/jackal_ws/src/my_jackal_nav/config/localization.rviz"]
+            arguments=["-d", rviz_config]
         )
     ])
-

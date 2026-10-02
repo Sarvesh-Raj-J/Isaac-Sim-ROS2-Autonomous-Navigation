@@ -4,9 +4,8 @@ project(my_jackal_nav)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY launch maps config urdf
+  DIRECTORY launch maps config
   DESTINATION share/${PROJECT_NAME}
 )
 
 ament_package()
-

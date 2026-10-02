@@ -156,29 +156,25 @@ obstacles, and the controller should drive the simulated wheel joints.
 The source was checked file by file. These items should be resolved before
 calling the workspace production-ready:
 
-1. **Absolute paths:** the two main launch files and `nav2_params.yaml` contain
-   `/home/robotics/jackal_ws/...` paths. They will fail on another machine
-   unless those paths are changed or derived from the package share directory.
-2. **Two localization conventions:** the main launch uses `world` and
+1. **Two localization conventions:** the main launch uses `world` and
    `sick_lms1xx_lidar_frame`; the stand-alone localization launch uses `odom`
    and `Lidar`. Use one convention consistently with the Isaac Sim scene.
-3. **RViz path mismatch:** `view_map.launch.py` refers to
-   `share/my_jackal_nav/rviz/view_map.rviz`, but this workspace contains
-   `config/localization.rviz` instead.
-4. **EKF is not launched:** `config/ekf.yaml` configures
+2. **EKF is not launched:** `config/ekf.yaml` configures
    `robot_localization`, but no launch file starts `ekf_node`. It is currently
    documentation/configuration only.
-5. **Package dependencies:** `package.xml` should be expanded if the optional
+3. **Package dependencies:** `package.xml` should be expanded if the optional
    EKF is enabled, and should declare every runtime Nav2/plugin dependency
    required by the target ROS 2 distribution.
-6. **Install layout:** `CMakeLists.txt` installs `urdf`, although no `urdf`
-   directory is present in the source tree. Add the directory when a robot
-   description is needed, or remove that install entry.
-7. **Map selection:** `final_occ_map` is the map used by the main bringup;
+4. **Map selection:** `final_occ_map` is the map used by the main bringup;
    `hospitaljackal` is used by the alternate localization/view launch files.
    Confirm that the selected map matches the Isaac Sim environment.
-8. **TF snapshots:** the files in `src/tf` are recorded graphs for debugging,
+5. **TF snapshots:** the files in `src/tf` are recorded graphs for debugging,
    not live TF publishers.
+
+All launch-time file paths are now derived from the installed package share
+directory, and the main map is supplied through the Nav2 launch argument.
+The workspace can therefore be copied to a different machine or directory
+without editing source paths.
 
 These are documented rather than silently changed so the original simulation
 behavior remains visible. The main launch path is the recommended starting

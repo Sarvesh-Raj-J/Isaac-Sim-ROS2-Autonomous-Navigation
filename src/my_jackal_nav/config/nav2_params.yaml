@@ -174,7 +174,6 @@ global_costmap:
 map_server:
   ros__parameters:
     use_sim_time: true
-    yaml_filename: "/home/robotics/jackal_ws/src/my_jackal_nav/maps/final_occ_map.yaml"
     topic_name: "/map"
     frame_id: "map"
 
@@ -194,4 +193,3 @@ lifecycle_manager:
     autostart: true
     node_names: ["map_server", "amcl", "controller_server", "smoother_server", "planner_server", "behavior_server", "bt_navigator", "waypoint_follower", "velocity_smoother"]
     bond_timeout: 4.0
-

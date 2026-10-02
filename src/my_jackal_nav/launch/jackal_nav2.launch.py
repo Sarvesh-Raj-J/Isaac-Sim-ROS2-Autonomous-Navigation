@@ -5,11 +5,11 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
 import os
 
-MAP = "/home/robotics/jackal_ws/src/my_jackal_nav/maps/final_occ_map.yaml"
-PARAMS = "/home/robotics/jackal_ws/src/my_jackal_nav/config/nav2_params.yaml"
-
 def generate_launch_description():
+    package_dir = get_package_share_directory("my_jackal_nav")
     nav2_bringup_dir = get_package_share_directory("nav2_bringup")
+    map_file = os.path.join(package_dir, "maps", "final_occ_map.yaml")
+    params_file = os.path.join(package_dir, "config", "nav2_params.yaml")
 
     # Static TF: base_link -> sick_lms1xx_lidar_frame
     # (map->world is NOT published as static — AMCL publishes it dynamically
@@ -32,9 +32,9 @@ def generate_launch_description():
             os.path.join(nav2_bringup_dir, "launch", "bringup_launch.py")
         ),
         launch_arguments={
-            "map": MAP,
+            "map": map_file,
             "use_sim_time": "true",
-            "params_file": PARAMS,
+            "params_file": params_file,
             "autostart": "true",
             "use_composition": "True",
             "use_respawn": "False",
